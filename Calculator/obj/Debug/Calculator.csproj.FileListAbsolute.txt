@@ -1,0 +1,15 @@
+D:\Dokumenty\C#\Calculator\Calculator\bin\Debug\Calculator.exe.config
+D:\Dokumenty\C#\Calculator\Calculator\bin\Debug\Calculator.exe
+D:\Dokumenty\C#\Calculator\Calculator\bin\Debug\Calculator.pdb
+D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\Calculator.csprojAssemblyReference.cache
+D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\MainWindow.g.cs
+D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\App.g.cs
+D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\Calculator_MarkupCompile.cache
+D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\Calculator_MarkupCompile.lref
+D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\MainWindow.baml
+D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\Calculator.g.resources
+D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\Calculator.Properties.Resources.resources
+D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\Calculator.csproj.GenerateResource.cache
+D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\Calculator.csproj.CoreCompileInputs.cache
+D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\Calculator.exe
+D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\Calculator.pdb

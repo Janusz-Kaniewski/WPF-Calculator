@@ -21,6 +21,8 @@ namespace Calculator
     public partial class MainWindow : Window
     {
         string value1 = "0";
+        bool isPoint = false;
+        bool isMinus = false;
 
         public MainWindow()
         {
@@ -30,6 +32,7 @@ namespace Calculator
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Display.Text = value1;
+            Digit0_Button.IsEnabled = false;
         }
 
         private void Digit_Button_Click(object sender, RoutedEventArgs e)
@@ -46,6 +49,12 @@ namespace Calculator
             {
                 value1 += button_value;
             }
+            
+            if(Double.Parse(value1) > 0)
+            {
+                Digit0_Button.IsEnabled = true;
+            }
+
             Display.Text = value1;
         }
 
@@ -54,11 +63,39 @@ namespace Calculator
             if (value1.Length > 1)
             {
                 value1 = value1.Remove(value1.Length - 1);
+                if(!value1.Contains(","))
+                {
+                    isPoint = false;
+                    Point_Button.IsEnabled = true;
+                }
             }
             else
             {
                 value1 = "0";
+                Digit0_Button.IsEnabled = false;
             }
+            Display.Text = value1;
+        }
+
+        private void Point_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if(!isPoint)
+            {
+                value1 += ",";
+                isPoint = true;
+                Point_Button.IsEnabled = false;
+                Digit0_Button.IsEnabled = true;
+                Display.Text = value1;
+            }
+        }
+
+        private void Clear_Button_Click(object sender, RoutedEventArgs e)
+        {
+            isPoint = false;
+            isMinus = false;
+            Point_Button.IsEnabled = true;
+            Digit0_Button.IsEnabled = false;
+            value1 = "0";
             Display.Text = value1;
         }
     }

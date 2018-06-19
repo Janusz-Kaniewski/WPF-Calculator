@@ -21,6 +21,7 @@ namespace Calculator
     public partial class MainWindow : Window
     {
         string value1 = "0";
+        int counter = 1;
         bool isPoint = false;
         bool isMinus = false;
 
@@ -41,18 +42,31 @@ namespace Calculator
 
             string button_value = ((Button)sender).Content.ToString();
 
-            if (Display.Text == "0")
+            if (counter < 12)
             {
-                value1 = button_value;
+                if (Display.Text == "0")
+                {
+                    value1 = button_value;
+                }
+                else
+                {
+                    value1 += button_value;
+                    counter++;
+                }
+
+                if (Double.Parse(value1) > 0)
+                {
+                    Digit0_Button.IsEnabled = true;
+                }
+            }
+
+            if(counter==12)
+            {
+                Point_Button.IsEnabled = false;
             }
             else
             {
-                value1 += button_value;
-            }
-            
-            if(Double.Parse(value1) > 0)
-            {
-                Digit0_Button.IsEnabled = true;
+                Point_Button.IsEnabled = true;
             }
 
             Display.Text = value1;
@@ -63,6 +77,7 @@ namespace Calculator
             if (value1.Length > 1)
             {
                 value1 = value1.Remove(value1.Length - 1);
+                counter--;
                 if(!value1.Contains(","))
                 {
                     isPoint = false;
@@ -82,6 +97,7 @@ namespace Calculator
             if(!isPoint)
             {
                 value1 += ",";
+                counter++;
                 isPoint = true;
                 Point_Button.IsEnabled = false;
                 Digit0_Button.IsEnabled = true;
@@ -93,6 +109,7 @@ namespace Calculator
         {
             isPoint = false;
             isMinus = false;
+            counter = 1;
             Point_Button.IsEnabled = true;
             Digit0_Button.IsEnabled = false;
             value1 = "0";

@@ -23,9 +23,9 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Button Grid.Column="0" Content="Save result" Margin="5,0,5,0"></Button>
-                    <Button Grid.Column="1" Content="Delete file" Margin="5,0,5,0"></Button>
-                    <Button Grid.Column="2" Content="?" Margin="5,0,5,0"></Button>
+                    <Button x:Name="Save_result_Button" Grid.Column="0" Content="Save result" Margin="5,0,5,0"></Button>
+                    <Button x:Name="Delete_result_Button" Grid.Column="1" Content="Delete file" Margin="5,0,5,0"></Button>
+                    <Button x:Name="Help_Button" Grid.Column="2" Content="?" Margin="5,0,5,0"></Button>
                 </Grid>
             </Border>
             <Border Padding="0,10,0,0">
@@ -44,7 +44,7 @@
                     <Button x:Name="Digit8_Button" Click="Digit_Button_Click" Grid.Column="1" Content="8" Margin="5,0,5,0"></Button>
                     <Button x:Name="Digit9_Button" Click="Digit_Button_Click" Grid.Column="2" Content="9" Margin="5,0,5,0"></Button>
                     <Button x:Name="Backspace_Button" Click="Backspace_Button_Click" Grid.Column="3" Content="&lt;-" Margin="5,0,5,0"></Button>
-                    <Button x:Name="Plus_Button" Grid.Column="4" Content="+" Margin="5,0,5,0"></Button>
+                    <Button x:Name="Plus_Button" Click="Operation_Button_Click" Grid.Column="4" Content="+" Margin="5,0,5,0"></Button>
                 </Grid>
             </Border>
             <Border Padding="0,10,0,10">
@@ -63,7 +63,7 @@
                     <Button x:Name="Digit5_Button" Click="Digit_Button_Click" Grid.Column="1" Content="5" Margin="5,0,5,0"></Button>
                     <Button x:Name="Digit6_Button" Click="Digit_Button_Click" Grid.Column="2" Content="6" Margin="5,0,5,0"></Button>
                     <Button x:Name="Clear_Button" Click="Clear_Button_Click" Grid.Column="3" Content="C" Margin="5,0,5,0"></Button>
-                    <Button x:Name="Minus_Button" Grid.Column="4" Content="-" Margin="5,0,5,0"></Button>
+                    <Button x:Name="Minus_Button" Click="Operation_Button_Click" Grid.Column="4" Content="-" Margin="5,0,5,0"></Button>
                 </Grid>
             </Border>
             <Border Padding="0,0,0,10">
@@ -81,8 +81,8 @@
                     <Button x:Name="Digit1_Button" Click="Digit_Button_Click" Grid.Column="0" Content="1" Margin="5,0,5,0"></Button>
                     <Button x:Name="Digit2_Button" Click="Digit_Button_Click" Grid.Column="1" Content="2" Margin="5,0,5,0"></Button>
                     <Button x:Name="Digit3_Button" Click="Digit_Button_Click" Grid.Column="2" Content="3" Margin="5,0,5,0"></Button>
-                    <Button x:Name="Power_Button" Grid.Column="3" Content="^" Margin="5,0,5,0"></Button>
-                    <Button x:Name="Multiply_Button" Grid.Column="4" Content="*" Margin="5,0,5,0"></Button>
+                    <Button x:Name="Power_Button" Click="Operation_Button_Click" Grid.Column="3" Content="^" Margin="5,0,5,0"></Button>
+                    <Button x:Name="Multiply_Button" Click="Operation_Button_Click" Grid.Column="4" Content="*" Margin="5,0,5,0"></Button>
                 </Grid>
             </Border>
             <Border Padding="0,0,0,10">
@@ -97,11 +97,11 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="48"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Button x:Name="Negate_Button" Grid.Column="0" Content="+/-" Margin="5,0,5,0"></Button>
+                    <Button x:Name="Negate_Button" Click="Negate_Button_Click" Grid.Column="0" Content="+/-" Margin="5,0,5,0"></Button>
                     <Button x:Name="Digit0_Button" Click="Digit_Button_Click" Grid.Column="1" Content="0" Margin="5,0,5,0"></Button>
                     <Button x:Name="Point_Button" Click="Point_Button_Click" Grid.Column="2" Content="." Margin="5,0,5,0"></Button>
                     <Button x:Name="Equal_Button" Grid.Column="3" Content="=" Margin="5,0,5,0"></Button>
-                    <Button x:Name="Divide_Button" Grid.Column="4" Content="/" Margin="5,0,5,0"></Button>
+                    <Button x:Name="Divide_Button" Click="Operation_Button_Click" Grid.Column="4" Content="/" Margin="5,0,5,0"></Button>
                 </Grid>
             </Border>
         </StackPanel>

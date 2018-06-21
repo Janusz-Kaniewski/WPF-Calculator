@@ -89,6 +89,35 @@ namespace Calculator
             }
         }
 
+        private double calculate()
+        {
+            number2 = Double.Parse(value2);
+
+            switch (operationID)
+            {
+                case (int)Operation.NONE:
+                    return 0;
+
+                case (int)Operation.ADD:
+                    return number1 + number2;
+
+                case (int)Operation.SUB:
+                    return number1 - number2;
+
+                case (int)Operation.MUL:
+                    return number1 * number2;
+
+                case (int)Operation.DIV:
+                    return number1 / number2;
+
+                case (int)Operation.POW:
+                    return Math.Pow(number1, number2);
+            }
+
+
+            return 0;
+        }
+
         private void Digit_Button_Click(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show((sender as Button).Content.ToString());
@@ -153,36 +182,66 @@ namespace Calculator
                 numbers_left = 1;
             }
 
-            if (value1.Length > numbers_left)
+            if (stateID == (int)State.ENTERING_A)
             {
-                value1 = value1.Remove(value1.Length - 1);
-                counter--;
-                if(!value1.Contains(","))
+                if (value1.Length > numbers_left)
                 {
-                    isPoint = false;
-                    Point_Button.IsEnabled = true;
+                    value1 = value1.Remove(value1.Length - 1);
+                    counter--;
+                    if (!value1.Contains(","))
+                    {
+                        isPoint = false;
+                        Point_Button.IsEnabled = true;
+                    }
+                }
+                else
+                {
+                    value1 = "0";
+                    Digit0_Button.IsEnabled = false;
+                    isMinus = false;
                 }
             }
-            else
+            else if (stateID == (int)State.ENTERING_B)
             {
-                value1 = "0";
-                Digit0_Button.IsEnabled = false;
-                isMinus = false;
+                if (value2.Length > numbers_left)
+                {
+                    value2 = value2.Remove(value2.Length - 1);
+                    counter--;
+                    if (!value2.Contains(","))
+                    {
+                        isPoint = false;
+                        Point_Button.IsEnabled = true;
+                    }
+                }
+                else
+                {
+                    value2 = "0";
+                    Digit0_Button.IsEnabled = false;
+                    isMinus = false;
+                }
             }
-            Display.Text = value1;
+            refreshDisplay(stateID);
         }
 
         private void Point_Button_Click(object sender, RoutedEventArgs e)
         {
-            if(!isPoint)
+            if(stateID == (int)State.ENTERING_A && !isPoint)
             {
                 value1 += ",";
                 counter++;
                 isPoint = true;
                 Point_Button.IsEnabled = false;
                 Digit0_Button.IsEnabled = true;
-                Display.Text = value1;
             }
+            else if (stateID == (int)State.ENTERING_B && !isPoint)
+            {
+                value2 += ",";
+                counter++;
+                isPoint = true;
+                Point_Button.IsEnabled = false;
+                Digit0_Button.IsEnabled = true;
+            }
+            refreshDisplay(stateID);
         }
 
         private void Clear_Button_Click(object sender, RoutedEventArgs e)
@@ -194,8 +253,8 @@ namespace Calculator
             Digit0_Button.IsEnabled = false;
             value1 = "0";
             value2 = "0";
-            stateID = (int)State.ENTERING_A;
             operationID = (int)Operation.NONE;
+            stateID = (int)State.ENTERING_A;
             refreshDisplay(stateID);
         }
 
@@ -240,6 +299,7 @@ namespace Calculator
         {
             string button_value = ((Button)sender).Content.ToString();
             operation_sign = button_value;
+            Point_Button.IsEnabled = true;
 
             operationID = set_operationID(button_value);
 
@@ -247,8 +307,8 @@ namespace Calculator
             {
                 number1 = Double.Parse(value1);
                 value1 = number1.ToString();
-                refreshDisplay(stateID);
                 stateID = (int)State.ENTERING_B;
+                refreshDisplay(stateID);
                 counter = 1;
                 isMinus = false;
                 isPoint = false;
@@ -257,6 +317,19 @@ namespace Calculator
             {
 
             }
+        }
+
+        private void Equal_Button_Click(object sender, RoutedEventArgs e)
+        {
+            result = calculate();
+            //MessageBox.Show(result.ToString());
+            value1 = result.ToString();
+            value2 = "0";
+            number1 = 0;
+            number2 = 0;
+            operationID = (int)Operation.NONE;
+            stateID = (int)State.ENTERING_A;
+            refreshDisplay(stateID);
         }
     }
 }

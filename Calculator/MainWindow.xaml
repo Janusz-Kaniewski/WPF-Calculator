@@ -100,7 +100,7 @@
                     <Button x:Name="Negate_Button" Click="Negate_Button_Click" Grid.Column="0" Content="+/-" Margin="5,0,5,0"></Button>
                     <Button x:Name="Digit0_Button" Click="Digit_Button_Click" Grid.Column="1" Content="0" Margin="5,0,5,0"></Button>
                     <Button x:Name="Point_Button" Click="Point_Button_Click" Grid.Column="2" Content="." Margin="5,0,5,0"></Button>
-                    <Button x:Name="Equal_Button" Grid.Column="3" Content="=" Margin="5,0,5,0"></Button>
+                    <Button x:Name="Equal_Button" Click="Equal_Button_Click"  Grid.Column="3" Content="=" Margin="5,0,5,0"></Button>
                     <Button x:Name="Divide_Button" Click="Operation_Button_Click" Grid.Column="4" Content="/" Margin="5,0,5,0"></Button>
                 </Grid>
             </Border>

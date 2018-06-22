@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="Calculator" Height="425" Width="318">
 
@@ -25,7 +26,7 @@
                     </Grid.RowDefinitions>
                     <Button x:Name="Save_result_Button" Grid.Column="0" Content="Save result" Margin="5,0,5,0"></Button>
                     <Button x:Name="Delete_result_Button" Grid.Column="1" Content="Delete file" Margin="5,0,5,0"></Button>
-                    <Button x:Name="Help_Button" Grid.Column="2" Content="?" Margin="5,0,5,0"></Button>
+                    <Button x:Name="Help_Button" Click="Help_Button_Click" Grid.Column="2" Content="?" Margin="5,0,5,0"></Button>
                 </Grid>
             </Border>
             <Border Padding="0,10,0,0">

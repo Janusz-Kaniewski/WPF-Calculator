@@ -62,7 +62,6 @@ namespace Calculator
             refreshDisplay(stateID);
             Digit0_Button.IsEnabled = false;
 
-            Help_Button.IsEnabled = false;
             Save_result_Button.IsEnabled = false;
             Delete_result_Button.IsEnabled = false;
         }
@@ -112,10 +111,10 @@ namespace Calculator
 
                 case (int)Operation.POW:
                     return Math.Pow(number1, number2);
+
+                default:
+                    return 0;
             }
-
-
-            return 0;
         }
 
         private void Digit_Button_Click(object sender, RoutedEventArgs e)
@@ -158,6 +157,15 @@ namespace Calculator
                     if (Double.Parse(value2) > 0)
                     {
                         Digit0_Button.IsEnabled = true;
+                    }
+
+                    if (Double.Parse(value2) == 0 && operationID == (int)Operation.DIV)
+                    {
+                        Equal_Button.IsEnabled = false;
+                    }
+                    else
+                    {
+                        Equal_Button.IsEnabled = true;
                     }
                 }
                 refreshDisplay(stateID);
@@ -218,6 +226,15 @@ namespace Calculator
                     value2 = "0";
                     Digit0_Button.IsEnabled = false;
                     isMinus = false;
+                }
+
+                if (Double.Parse(value2) == 0 && operationID == (int)Operation.DIV)
+                {
+                    Equal_Button.IsEnabled = false;
+                }
+                else
+                {
+                    Equal_Button.IsEnabled = true;
                 }
             }
             refreshDisplay(stateID);
@@ -301,8 +318,6 @@ namespace Calculator
             operation_sign = button_value;
             Point_Button.IsEnabled = true;
 
-            operationID = set_operationID(button_value);
-
             if (stateID == (int)State.ENTERING_A)
             {
                 number1 = Double.Parse(value1);
@@ -315,21 +330,52 @@ namespace Calculator
             }
             else if (stateID == (int)State.ENTERING_B)
             {
-
+                result = calculate();
+                value1 = result.ToString();
+                value2 = "0";
+                number1 = result;
+                number2 = 0;
+                refreshDisplay(stateID);
             }
+
+            operationID = set_operationID(button_value);
+
+            if (operationID == (int)Operation.DIV)
+            {
+                Equal_Button.IsEnabled = false;
+            }
+
+            Digit0_Button.IsEnabled = false;
         }
 
         private void Equal_Button_Click(object sender, RoutedEventArgs e)
         {
-            result = calculate();
-            //MessageBox.Show(result.ToString());
-            value1 = result.ToString();
-            value2 = "0";
-            number1 = 0;
-            number2 = 0;
-            operationID = (int)Operation.NONE;
-            stateID = (int)State.ENTERING_A;
-            refreshDisplay(stateID);
+            if (operationID != (int)Operation.NONE)
+            {
+                result = calculate();
+                value1 = result.ToString();
+                value2 = "0";
+                number1 = 0;
+                number2 = 0;
+                counter = value1.Length;
+                operationID = (int)Operation.NONE;
+                stateID = (int)State.ENTERING_A;
+                refreshDisplay(stateID);
+
+                if(result==0)
+                {
+                    Digit0_Button.IsEnabled = false;
+                }
+                else
+                {
+                    Digit0_Button.IsEnabled = true;
+                }
+            }
+        }
+
+        private void Help_Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("BLA BLA BLA", "Help");
         }
     }
 }

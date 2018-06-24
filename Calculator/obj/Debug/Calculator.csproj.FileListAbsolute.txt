@@ -13,3 +13,5 @@ D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\Calculator.csproj.GenerateResour
 D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\Calculator.csproj.CoreCompileInputs.cache
 D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\Calculator.exe
 D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\Calculator.pdb
+D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\HelpDialog.g.cs
+D:\Dokumenty\C#\Calculator\Calculator\obj\Debug\HelpDialog.baml

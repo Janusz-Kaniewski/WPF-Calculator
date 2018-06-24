@@ -375,7 +375,9 @@ namespace Calculator
 
         private void Help_Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("BLA BLA BLA", "Help");
+            HelpDialog help = new HelpDialog();
+            help.Owner = this;
+            help.ShowDialog();
         }
     }
 }

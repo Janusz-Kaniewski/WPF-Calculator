@@ -24,7 +24,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Button x:Name="Save_result_Button" Grid.Column="0" Content="Save result" Margin="5,0,5,0"></Button>
+                    <Button x:Name="Save_result_Button" Click="Save_result_Button_Click" Grid.Column="0" Content="Save result" Margin="5,0,5,0"></Button>
                     <Button x:Name="Delete_result_Button" Grid.Column="1" Content="Delete file" Margin="5,0,5,0"></Button>
                     <Button x:Name="Help_Button" Click="Help_Button_Click" Grid.Column="2" Content="?" Margin="5,0,5,0"></Button>
                 </Grid>

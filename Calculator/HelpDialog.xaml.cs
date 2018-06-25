@@ -28,5 +28,10 @@ namespace Calculator
         {
             label1.Content = "BLABLABLA";
         }
+
+        private void close_button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

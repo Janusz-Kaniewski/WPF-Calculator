@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.IO;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -26,6 +27,7 @@ namespace Calculator
         double number2;
         double result;
         int counter = 1;
+        int click_counter = 0;
         bool isPoint = false;
         bool isMinus = false;
         int operationID;
@@ -57,13 +59,52 @@ namespace Calculator
         //method below will be activated first - when window is loaded and displayed
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            if(File.Exists("calculation_result.txt"))
+            {
+                MessageBoxResult load_question = MessageBox.Show("The Calculator has detected an existing file with the result of previous calculations. Load?", "Loading the saved result", MessageBoxButton.YesNo);
+                switch(load_question)
+                {
+                    case MessageBoxResult.Yes:
+                        load_result();
+                        counter = value1.Length - 1;
+                        break;
+
+                    case MessageBoxResult.No:
+                        break;
+                }
+            }
+
+            if (Double.Parse(value1) == 0)
+            {
+                Digit0_Button.IsEnabled = false;
+            }
+            else
+            {
+                Digit0_Button.IsEnabled = true;
+            }
+
+            if(value1.Contains("-"))
+            {
+                isMinus = true;
+            }
+
+            if(value1.Contains(","))
+            {
+                isPoint = true;
+                Point_Button.IsEnabled = false;
+            }
+
             operationID = (int)Operation.NONE;
             stateID = (int)State.ENTERING_A;
             refreshDisplay(stateID);
-            Digit0_Button.IsEnabled = false;
-
             Save_result_Button.IsEnabled = false;
             Delete_result_Button.IsEnabled = false;
+        }
+
+        private void load_result()
+        {
+            value1 = File.ReadAllText("calculation_result.txt");
+            result = Double.Parse(value1);
         }
 
         private int set_operationID(string bv)
@@ -162,10 +203,20 @@ namespace Calculator
                     if (Double.Parse(value2) == 0 && operationID == (int)Operation.DIV)
                     {
                         Equal_Button.IsEnabled = false;
+                        Plus_Button.IsEnabled = false;
+                        Minus_Button.IsEnabled = false;
+                        Multiply_Button.IsEnabled = false;
+                        Divide_Button.IsEnabled = false;
+                        Power_Button.IsEnabled = false;
                     }
                     else
                     {
                         Equal_Button.IsEnabled = true;
+                        Plus_Button.IsEnabled = true;
+                        Minus_Button.IsEnabled = true;
+                        Multiply_Button.IsEnabled = true;
+                        Divide_Button.IsEnabled = true;
+                        Power_Button.IsEnabled = true;
                     }
                 }
                 refreshDisplay(stateID);
@@ -231,10 +282,20 @@ namespace Calculator
                 if (Double.Parse(value2) == 0 && operationID == (int)Operation.DIV)
                 {
                     Equal_Button.IsEnabled = false;
+                    Plus_Button.IsEnabled = false;
+                    Minus_Button.IsEnabled = false;
+                    Multiply_Button.IsEnabled = false;
+                    Divide_Button.IsEnabled = false;
+                    Power_Button.IsEnabled = false;
                 }
                 else
                 {
                     Equal_Button.IsEnabled = true;
+                    Plus_Button.IsEnabled = true;
+                    Minus_Button.IsEnabled = true;
+                    Multiply_Button.IsEnabled = true;
+                    Divide_Button.IsEnabled = true;
+                    Power_Button.IsEnabled = true;
                 }
             }
             refreshDisplay(stateID);
@@ -268,6 +329,7 @@ namespace Calculator
             counter = 1;
             Point_Button.IsEnabled = true;
             Digit0_Button.IsEnabled = false;
+            Save_result_Button.IsEnabled = false;
             value1 = "0";
             value2 = "0";
             operationID = (int)Operation.NONE;
@@ -343,13 +405,22 @@ namespace Calculator
             if (operationID == (int)Operation.DIV)
             {
                 Equal_Button.IsEnabled = false;
+                Plus_Button.IsEnabled = false;
+                Minus_Button.IsEnabled = false;
+                Multiply_Button.IsEnabled = false;
+                Divide_Button.IsEnabled = false;
+                Power_Button.IsEnabled = false;
             }
 
+            click_counter++;
+
+            if(click_counter>1) Save_result_Button.IsEnabled = true;
             Digit0_Button.IsEnabled = false;
         }
 
         private void Equal_Button_Click(object sender, RoutedEventArgs e)
         {
+            click_counter = 0;
             if (operationID != (int)Operation.NONE)
             {
                 result = calculate();
@@ -370,6 +441,8 @@ namespace Calculator
                 {
                     Digit0_Button.IsEnabled = true;
                 }
+
+                Save_result_Button.IsEnabled = true;
             }
         }
 
@@ -378,6 +451,12 @@ namespace Calculator
             HelpDialog help = new HelpDialog();
             help.Owner = this;
             help.ShowDialog();
+        }
+
+        private void Save_result_Button_Click(object sender, RoutedEventArgs e)
+        {
+            File.WriteAllText("calculation_result.txt", result.ToString());
+            MessageBox.Show("Result saved as \"calculation_result.txt\".");
         }
     }
 }

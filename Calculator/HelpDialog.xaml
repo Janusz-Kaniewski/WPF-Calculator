@@ -12,6 +12,7 @@
     <Border Padding="10">
         <StackPanel>
             <Label x:Name="label1"></Label>
+            <Button x:Name="close_button" Content="Zamknij" Click="close_button_Click"></Button>
         </StackPanel>
     </Border>
 </Window>

@@ -72,6 +72,11 @@ namespace Calculator
                     case MessageBoxResult.No:
                         break;
                 }
+                Delete_result_Button.IsEnabled = true;
+            }
+            else
+            {
+                Delete_result_Button.IsEnabled = false;
             }
 
             if (Double.Parse(value1) == 0)
@@ -98,7 +103,6 @@ namespace Calculator
             stateID = (int)State.ENTERING_A;
             refreshDisplay(stateID);
             Save_result_Button.IsEnabled = false;
-            Delete_result_Button.IsEnabled = false;
         }
 
         private void load_result()
@@ -448,8 +452,7 @@ namespace Calculator
 
         private void Help_Button_Click(object sender, RoutedEventArgs e)
         {
-            HelpDialog help = new HelpDialog();
-            help.Owner = this;
+            HelpDialog help = new HelpDialog() { Owner = this };
             help.ShowDialog();
         }
 
@@ -457,6 +460,23 @@ namespace Calculator
         {
             File.WriteAllText("calculation_result.txt", result.ToString());
             MessageBox.Show("Result saved as \"calculation_result.txt\".");
+            Delete_result_Button.IsEnabled = true;
+        }
+
+        private void Delete_result_Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult delete_question = MessageBox.Show("Are you sure you want to delete the file with the result?", "Delete file", MessageBoxButton.YesNo);
+            switch (delete_question)
+            {
+                case MessageBoxResult.Yes:
+                    File.Delete("calculation_result.txt");
+                    MessageBox.Show("File with the result has been deleted.");
+                    Delete_result_Button.IsEnabled = false;
+                    break;
+
+                case MessageBoxResult.No:
+                    break;
+            }
         }
     }
 }

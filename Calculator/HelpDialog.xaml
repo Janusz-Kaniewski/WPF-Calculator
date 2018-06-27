@@ -11,8 +11,9 @@
 
     <Border Padding="10">
         <StackPanel>
-            <Label x:Name="label1"></Label>
-            <Button x:Name="close_button" Content="Zamknij" Click="close_button_Click"></Button>
+            <Label x:Name="author"></Label>
+            <Label x:Name="licence"></Label>
+            <Button x:Name="close_button" Width="70" VerticalAlignment="Bottom" Content="Close" Click="close_button_Click" HorizontalAlignment="Center"></Button>
         </StackPanel>
     </Border>
 </Window>

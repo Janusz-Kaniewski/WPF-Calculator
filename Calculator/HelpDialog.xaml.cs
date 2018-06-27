@@ -26,7 +26,8 @@ namespace Calculator
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            label1.Content = "BLABLABLA";
+            author.Content = "Calculator v0.11 - Janusz Kaniewski 2018";
+            licence.Content = "This software is under MIT licence.";
         }
 
         private void close_button_Click(object sender, RoutedEventArgs e)
